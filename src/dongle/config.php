@@ -10,4 +10,5 @@ $plugin_config['dongle']['name'] = 'dongle';
 // smsc configuration
 $plugin_config['dongle']['_smsc_config_'] = [];
 
-define('_ASTERISK_', '/usr/bin/asterisk');
+// location of Asterisk binary
+define('_ASTERISK_', '/usr/sbin/asterisk');

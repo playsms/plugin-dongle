@@ -14,10 +14,16 @@ playSMS       | https://playsms.org
 
 You will need an installed and working playSMS, preferred playSMS version 1.4.7 (current latest).
 
+You also need to have a fully working Asterisk with chan_dongle loaded and configured properly.
+
 Assumed your playSMS is installed with these setups:
 
 - Your playSMS web files is in `/home/user/web/playsms`
 - Your playSMS database is `playsms`
+
+Also, assumed your Asterisk binary installed in `/usr/sbin/asterisk`
+
+Note, if your Asterisk binary not in above location then you must change `_ASTERISK_` constant after installation in `plugin/gateway/dongle/config.php`.
 
 Follow below steps in order:
 
