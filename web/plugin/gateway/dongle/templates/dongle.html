@@ -1,0 +1,15 @@
+{{ DIALOG_DISPLAY }}
+<h2>{{ Manage Dongle }}</h2>
+<form action=index.php?app=main&inc=gateway_dongle&op=manage_save method=post>
+	{{ CSRF_FORM }}
+	<table class=playsms-table>
+		<tbody>
+			<tr>
+				<td class=label-sizer>{{ Gateway name }}</td>
+				<td>dongle</td>
+			</tr>
+		</tbody>
+	</table>
+	<p><input type=submit class=button value="{{ Save }}">
+</form>
+{{ BUTTON_BACK }}
