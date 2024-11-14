@@ -63,6 +63,6 @@ Asterisk dialplan for incoming SMS:
 exten => sms,1,Set(PLAYSMSIN=/usr/bin/php -q /home/user/web/playsms/plugin/gateway/dongle/callback.php)
 exten => sms,n,GotoIf($[ "x${PLAYSMSIN}" = "x" ]?end)
 exten => sms,n,Verbose(Incoming SMS smsc:${DONGLENAME} from:${CALLERID(num)} msg:${BASE64_DECODE(${SMS_BASE64})})
-exten => sms,n,System(${PLAYSMSIN} -rx "${DONGLENAME}" "${STRFTIME(${EPOCH},,%Y-%m-%d %H:%M:%S)}" "${CALLERID(num)}" "${${SMS_BASE64}}")
+exten => sms,n,System(${PLAYSMSIN} -rx "${DONGLENAME}" "${STRFTIME(${EPOCH},,%Y-%m-%d %H:%M:%S)}" "${CALLERID(num)}" "${SMS_BASE64}")
 exten => sms,n(end),Hangup()
 ```
