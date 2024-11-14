@@ -9,6 +9,7 @@ Update        | 241114
 Version       | 1.0
 Compatible    | playSMS 1.4.7
 playSMS       | https://playsms.org
+chan_dongle   | https://github.com/bg111/asterisk-chan-dongle
 
 # License
 
