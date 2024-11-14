@@ -31,6 +31,7 @@ switch (_OP_) {
 			'vars' => array(
 				'DIALOG_DISPLAY' => _dialog(),
 				'Manage Dongle' => _('Manage Dongle'),
+				'Gateway name' => _('Gateway name'),
 				'Save' => _('Save'),
 				'BUTTON_BACK' => _back('index.php?app=main&inc=core_gateway&op=gateway_list'),
 			)
