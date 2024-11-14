@@ -63,7 +63,7 @@ if (!$called_from_hook_call && $playsms_path) {
 $smsc = $argv[2] ?? '';
 $sms_datetime = $argv[3] ?? core_display_datetime(core_get_datetime());
 $sms_sender = $argv[4] ?? '';
-$sms_msg = isset($argv[5]) && $argv[4] ? base64_decode($argv[4]) : '';
+$sms_msg = isset($argv[5]) && $argv[5] ? base64_decode($argv[5]) : '';
 
 if ($smsc && $sms_sender && $sms_msg) {
 	_log("incoming from:" . $sms_sender . " m:[" . $sms_msg . "] smsc:" . $smsc, 2, "dongle callback");
