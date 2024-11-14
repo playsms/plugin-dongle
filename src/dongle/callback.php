@@ -24,10 +24,12 @@ if (!(php_sapi_name() === 'cli' || defined('STDIN'))) {
 	exit();
 }
 
-if (!$called_from_hook_call) {
-	if (chdir("../../../")) {
+$playsms_path = isset($argv[1]) && $argv[1] && is_dir($argv[1]) ? $argv[1] : '';
+
+if (!$called_from_hook_call && $playsms_path) {
+	if (chdir($playsms_path)) {
 		// ignore CSRF
-		$core_config['init']['ignore_csrf'] = TRUE;
+		$core_config['init']['ignore_csrf'] = true;
 
 		if (is_file('init.php')) {
 			include "init.php";
@@ -35,25 +37,33 @@ if (!$called_from_hook_call) {
 			$fn = isset($core_config['apps_path']['libs']) && $core_config['apps_path']['libs'] ? $core_config['apps_path']['libs'] . '/function.php' : '';
 			if ($fn && is_file($fn)) {
 				include $fn;
+			} else {
+				echo 'playSMS libs not found' . PHP_EOL;
+
+				exit();
 			}
+		} else {
+			echo 'playSMS init not found' . PHP_EOL;
+
+			exit();
 		}
 
 		if (!chdir("plugin/gateway/dongle/")) {
-			echo 'Unknown error' . PHP_EOL;
+			echo 'Plugin dongle not found' . PHP_EOL;
 
 			exit();
 		}
 	} else {
-		echo 'Unknown error' . PHP_EOL;
+		echo 'playSMS installation not found' . PHP_EOL;
 
 		exit();
 	}
 }
 
-$smsc = $argv[1] ?? '';
-$sms_datetime = $argv[2] ?? core_display_datetime(core_get_datetime());
-$sms_sender = $argv[3] ?? '';
-$sms_msg = isset($argv[4]) && $argv[4] ? base64_decode($argv[4]) : '';
+$smsc = $argv[2] ?? '';
+$sms_datetime = $argv[3] ?? core_display_datetime(core_get_datetime());
+$sms_sender = $argv[4] ?? '';
+$sms_msg = isset($argv[5]) && $argv[4] ? base64_decode($argv[4]) : '';
 
 if ($smsc && $sms_sender && $sms_msg) {
 	_log("incoming from:" . $sms_sender . " m:[" . $sms_msg . "] smsc:" . $smsc, 2, "dongle callback");

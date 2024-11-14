@@ -60,9 +60,12 @@ Asterisk dialplan for incoming SMS:
 
 ```
 [dongle-incoming]
-exten => sms,1,Set(PLAYSMSIN=/usr/bin/php -q /home/user/web/playsms/plugin/gateway/dongle/callback.php)
+exten => sms,1,NoOp(Incoming SMS handler starts)
+exten => sms,n,Set(PLAYSMS=/home/user/web/playsms)
+exten => sms,n,Set(PLAYSMSIN=/usr/bin/php -q ${PLAYSMS}/plugin/gateway/dongle/callback.php)
+exten => sms,n,GotoIf($[ "x${PLAYSMS}" = "x" ]?end)
 exten => sms,n,GotoIf($[ "x${PLAYSMSIN}" = "x" ]?end)
 exten => sms,n,Verbose(Incoming SMS smsc:${DONGLENAME} from:${CALLERID(num)} msg:${BASE64_DECODE(${SMS_BASE64})})
-exten => sms,n,System(${PLAYSMSIN} -rx "${DONGLENAME}" "${STRFTIME(${EPOCH},,%Y-%m-%d %H:%M:%S)}" "${CALLERID(num)}" "${SMS_BASE64}")
+exten => sms,n,System(${PLAYSMSIN} "${PLAYSMS}" "${DONGLENAME}" "${STRFTIME(${EPOCH},,%Y-%m-%d %H:%M:%S)}" "${CALLERID(num)}" "${SMS_BASE64}")
 exten => sms,n(end),Hangup()
 ```
