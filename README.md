@@ -1,4 +1,4 @@
-# plugin-easysendsms
+# plugin-dongle
 
 playSMS gateway plugin for Asterisk chan_dongle.
 
